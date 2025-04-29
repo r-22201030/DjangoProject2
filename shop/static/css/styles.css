@@ -2,6 +2,7 @@
 
 /* Base body style */
 body {
+
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
@@ -11,6 +12,7 @@ body {
     justify-content: center;
     align-items: center;
 }
+
 
 /* Navbar Styles */
 .main-navbar {
@@ -132,3 +134,25 @@ body {
     font-size: 20px;
     cursor: pointer;
 }
+
+    /* Additional simple styling */
+    .category-box, .sub-category-box, .sub-sub-category-box, .product-box {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .category-box:hover, .sub-category-box:hover, .sub-sub-category-box:hover {
+      background-color: #f8f9fa;
+    }
+    .product-box img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+    .product-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }

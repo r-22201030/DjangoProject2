@@ -1,0 +1,15 @@
+<!-- templates/item_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ item.name }} - KinbenNaki</title>
+</head>
+<body>
+  <h1>{{ item.name }}</h1>
+  <img src="{{ item.image.url }}" alt="{{ item.name }}">
+  <p>${{ item.price }}</p>
+  <p>{{ item.description }}</p>  <!-- Assuming your Item model has a description field -->
+  <a href="{% url 'all_items' %}">Back to All Items</a>
+</body>
+</html>

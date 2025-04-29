@@ -1,0 +1,86 @@
+<!-- templates/category.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Items - KinbenNaki</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f7f7f7;
+    }
+    h1 {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .item-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+    .item-card {
+      position: relative;
+      width: 200px;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .item-card:hover {
+      transform: translateY(-5px);
+    }
+    .item-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+    .item-card .info {
+      padding: 10px;
+      text-align: center;
+    }
+    .item-card .info h3 {
+      margin: 10px 0 5px;
+      font-size: 1.1rem;
+    }
+    .item-card .info p {
+      color: green;
+      font-weight: bold;
+    }
+    .details-btn {
+      display: none;
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: orange;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    .item-card:hover .details-btn {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>All Items</h1>
+  <div class="item-grid">
+    {% for item in items %}
+      <div class="item-card">
+        <img src="{{ item.image.url }}" alt="{{ item.name }}">
+        <div class="info">
+          <h3>{{ item.name }}</h3>
+          <p>${{ item.price }}</p>
+        </div>
+        <a href="{% url 'item_detail' item.id %}" class="details-btn">Details</a>
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>

@@ -1,458 +1,105 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>home</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>KinbenNaki</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Bootstrap CSS (via CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+  <!-- Internal CSS -->
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+    }
 
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    .navbar {
+      background-color: #ffffff;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      color: #28a745;
+      font-size: 24px;
+    }
+
+    .nav-link {
+      color: #333;
+      margin-right: 15px;
+    }
+
+    .nav-link:hover {
+      color: #28a745;
+    }
+
+    .nav-center-space {
+      flex: 1;
+    }
+
+    .body-content {
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    .hero-section {
+      padding: 80px 20px;
+      background-color: #e9f5ec;
+      border-radius: 8px;
+    }
+
+    .hero-section h1 {
+      font-size: 3rem;
+      color: #2e7d32;
+    }
+
+    .hero-section p {
+      font-size: 1.2rem;
+      color: #444;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="main-navbar shadow-sm sticky-top">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">KinbenNaki</a>
 
-        <div class="top-navbar">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-2 my-auto d-none d-sm-none d-md-block d-lg-block">
-                        <h5 class="brand-name">Kinben Naki</h5>
-                    </div>
-                    <div class="col-md-5 my-auto">
-                        <form role="search">
-                            <div class="input-group">
-                                <input type="search" placeholder="Search your product" class="form-control" />
-                                <button class="btn bg-white" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-md-5 my-auto">
-                        <ul class="nav justify-content-end">
-                            
-                            <li class="nav-item">
-                           <li class="nav-item">
-                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#locationModal">
-                                    <i class="fa fa-map-marker-alt"></i> Location
-                             </a>
-                            </li>
+      <div class="collapse navbar-collapse">
+        <!-- Left side -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'all_items' %}">Categories</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Weekly Deals</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Populars</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Savings</a></li>
+        </ul>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="fa fa-shopping-cart"></i> Cart (0)
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="fa fa-heart"></i> Wishlist (0)
-                                </a>
-                            </li>
-            <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fa fa-user"></i> Profile
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="profileMenu">
-        <li><a class="dropdown-item" href="#" onclick="openLoginModal()"><i class="fa fa-user"></i> Login</a></li>
-    </ul>
-</li>
+        <!-- Center empty space -->
+        <div class="nav-center-space"></div>
 
-                
-        <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
-                <a class="navbar-brand d-block d-sm-block d-md-none d-lg-none" href="#">
-                    Funda Ecom
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-
-                            <a class="nav-link" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">All Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Weekday Deals</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Popular Product</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Super Savings</a>
-                        </li>
-
-
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-      <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand" href="#">MyShop</a>
-
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ms-auto">
-                <!-- All Category Button -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#allCategoryModal">
-                        <i class="fa fa-th-large"></i> All Category
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<!-- Modal for All Categories -->
-<div class="modal fade" id="allCategoryModal" tabindex="-1" aria-labelledby="allCategoryModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-scrollable">
-    <div class="modal-content p-4">
-      <div class="modal-header">
-        <h5 class="modal-title" id="allCategoryModalLabel">All Categories</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- Right side -->
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#">🛒 Cart</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">👤 Login</a></li>
+        </ul>
       </div>
+    </div>
+  </nav>
 
-      <div class="modal-body">
-        <!-- Dynamic Content Load -->
-        <div id="mainContent"></div>
-      </div>
+  <!-- Body -->
+  <div class="container body-content">
+    <div class="hero-section">
+      <h1>Welcome to KinbenNaki</h1>
+      <p>Your trusted place for fresh groceries and daily essentials.</p>
+      <a href="#" class="btn btn-success mt-3">Shop Now</a>
     </div>
   </div>
-</div>
 
-<!-- Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Main Script -->
-<script>
-// Category Data
-const data = {
-    "Food": {
-        "Fruits & Vegetables": ["Fruits", "Vegetables"],
-        "Meat & Fish": ["Meat", "Fish"],
-        "Cooking": ["Oil", "Spices"],
-        "Snacks & Breakfast": ["Chips", "Cereal"],
-        "Dairy & Eggs": ["Milk", "Eggs"]
-    },
-    "Personal Care": {
-        "Women's Care": ["Face Cream", "Makeup"],
-        "Men's Care": ["Shaving", "Hair Gel"],
-        "Handwash/Tissue": ["Handwash", "Tissue Box"]
-    },
-    "Home Cleaning": {
-        "Harpic": ["Toilet Cleaner", "Bathroom Cleaner"],
-        "Dish Cleaner": ["Liquid Soap", "Dishwasher"],
-        "Air Freshner": ["Room Spray", "Gel Freshener"]
-    }
-};
-
-// Product Data (Example)
-const products = {
-    "Fruits": ["Apple", "Banana", "Orange"],
-    "Vegetables": ["Potato", "Carrot", "Tomato"],
-    "Meat": ["Chicken", "Beef"],
-    "Fish": ["Rui", "Katla"],
-    "Oil": ["Mustard Oil", "Olive Oil"],
-    "Spices": ["Turmeric", "Chili Powder"],
-    "Chips": ["Lays", "Pringles"],
-    "Cereal": ["Cornflakes", "Muesli"],
-    "Milk": ["Full Cream", "Toned Milk"],
-    "Eggs": ["White Eggs", "Brown Eggs"],
-    "Face Cream": ["Fairness Cream", "Moisturizer"],
-    "Makeup": ["Foundation", "Lipstick"],
-    "Shaving": ["Shaving Cream", "Razor"],
-    "Hair Gel": ["Strong Hold Gel", "Soft Gel"],
-    "Handwash": ["Dettol Handwash", "Lifebuoy Handwash"],
-    "Tissue Box": ["Soft Tissue", "Wet Tissue"],
-    "Toilet Cleaner": ["Harpic Blue", "Domex"],
-    "Bathroom Cleaner": ["Lysol", "Dettol Bathroom Cleaner"],
-    "Liquid Soap": ["Vim Liquid", "Pril Liquid"],
-    "Dishwasher": ["Bosch Dishwasher", "IFB Dishwasher"],
-    "Room Spray": ["Odonil Spray", "Air Wick"],
-    "Gel Freshener": ["Ambi Pur", "Godrej Aer"]
-};
-
-// Initial Load - Main Category
-function loadMainCategories() {
-    const container = document.getElementById('mainContent');
-    container.innerHTML = `<div class="row"></div>`;
-    const row = container.querySelector('.row');
-
-    for (let main in data) {
-        row.innerHTML += `
-            <div class="col-md-4 mb-3">
-                <div class="category-card" onclick="loadSubCategories('${main}')">
-                    <img src="https://via.placeholder.com/40" alt="${main}">
-                    <h6>${main}</h6>
-                </div>
-            </div>
-        `;
-    }
-}
-
-// Load Sub Categories
-function loadSubCategories(mainCategory) {
-    const container = document.getElementById('mainContent');
-    container.innerHTML = `
-        <button class="btn btn-secondary btn-sm mb-3" onclick="loadMainCategories()">← Back</button>
-        <div class="row"></div>
-    `;
-    const row = container.querySelector('.row');
-
-    for (let sub in data[mainCategory]) {
-        row.innerHTML += `
-            <div class="col-md-4 mb-3">
-                <div class="sub-category-card" onclick="loadSubSubCategories('${mainCategory}','${sub}')">
-                    <img src="https://via.placeholder.com/40" alt="${sub}">
-                    <h6>${sub}</h6>
-                </div>
-            </div>
-        `;
-    }
-}
-
-// Load Sub-Sub Categories
-function loadSubSubCategories(mainCategory, subCategory) {
-    const subSubOptions = data[mainCategory][subCategory];
-    const container = document.getElementById('mainContent');
-    container.innerHTML = `
-        <button class="btn btn-secondary btn-sm mb-3" onclick="loadSubCategories('${mainCategory}')">← Back</button>
-        <div class="row"></div>
-    `;
-    const row = container.querySelector('.row');
-
-    subSubOptions.forEach(item => {
-        row.innerHTML += `
-            <div class="col-md-4 mb-3">
-                <div class="sub-sub-category-card" onclick="loadProducts('${item}')">
-                    <img src="https://via.placeholder.com/40" alt="${item}">
-                    <h6>${item}</h6>
-                </div>
-            </div>
-        `;
-    });
-}
-
-// Load Products
-function loadProducts(subSubCategory) {
-    const container = document.getElementById('mainContent');
-    container.innerHTML = `
-        <button class="btn btn-secondary btn-sm mb-3" onclick="loadMainCategories()">← Back to Categories</button>
-        <div class="row"></div>
-    `;
-    const row = container.querySelector('.row');
-
-    (products[subSubCategory] || []).forEach(product => {
-        row.innerHTML += `
-            <div class="col-md-4 mb-3">
-                <div class="product-card">
-                    <img src="https://via.placeholder.com/40" alt="${product}">
-                    <h6>${product}</h6>
-                </div>
-            </div>
-        `;
-    });
-}
-
-                    <!-- Location Modal -->
-<div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content p-3">
-      <div class="modal-header">
-        <h5 class="modal-title" id="locationModalLabel">Select Your Location</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-
-        <input type="text" class="form-control mb-3" placeholder="Search Location..." id="locationSearch">
-
-        <select class="form-select" id="locationSelect">
-          <option selected disabled>Select Location</option>
-          <option value="Dhaka">Dhaka</option>
-          <option value="Chittagong">Chittagong</option>
-          <option value="Sylhet">Sylhet</option>
-          <option value="Khulna">Khulna</option>
-          <option value="Rajshahi">Rajshahi</option>
-          <option value="Barishal">Barishal</option>
-          <option value="Rangpur">Rangpur</option>
-          <option value="Mymensingh">Mymensingh</option>
-        </select>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onclick="saveLocation()">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Login Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content p-3">
-      <div class="modal-header">
-        <h5 class="modal-title" id="loginModalLabel">Login</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="modalBody">
-        <!-- Login Step 1 -->
-        <div id="step1">
-            <input type="text" class="form-control mb-2" id="mobileNumber" placeholder="Enter Mobile Number">
-            <button class="btn btn-primary w-100" onclick="sendOtp()">Login</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-let currentStep = 1;
-
-function openLoginModal() {
-    currentStep = 1;
-    document.getElementById('modalBody').innerHTML = `
-        <div id="step1">
-            <input type="text" class="form-control mb-2" id="mobileNumber" placeholder="Enter Mobile Number">
-            <button class="btn btn-primary w-100" onclick="sendOtp()">Login</button>
-        </div>
-    `;
-    var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-    loginModal.show();
-}
-
-function sendOtp() {
-    const mobile = document.getElementById('mobileNumber').value;
-    if(mobile.length != 10) {
-        alert('Please enter a valid 10-digit mobile number.');
-        return;
-    }
-    document.getElementById('modalBody').innerHTML = `
-        <div id="step2">
-            <input type="text" class="form-control mb-2" id="otpCode" placeholder="Enter OTP Code">
-            <button class="btn btn-success w-100" onclick="verifyOtp()">Verify OTP</button>
-        </div>
-    `;
-}
-
-function verifyOtp() {
-    const otp = document.getElementById('otpCode').value;
-    if(otp.length != 6) {
-        alert('Please enter a valid 6-digit OTP.');
-        return;
-    }
-    document.getElementById('modalBody').innerHTML = `
-        <div id="step3">
-            <input type="email" class="form-control mb-2" id="email" placeholder="Enter Email">
-            <input type="password" class="form-control mb-2" id="password" placeholder="Enter Password">
-            <button class="btn btn-primary w-100" onclick="finalSubmit()">Submit</button>
-        </div>
-    `;
-}
-
-function finalSubmit() {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    if(email == "" || password == "") {
-        alert('Please fill all fields.');
-        return;
-    }
-    // Successfully logged in
-    const profileMenu = document.getElementById('profileMenu');
-    profileMenu.innerHTML = `
-        <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i> Personal Information</a></li>
-        <li><a class="dropdown-item" href="#"><i class="fa fa-list"></i> Order History</a></li>
-        <li><a class="dropdown-item" href="#"><i class="fa fa-phone"></i> Contact</a></li>
-        <li><a class="dropdown-item" href="#"><i class="fa fa-sign-out"></i> Sign Out</a></li>
-        <li><a class="dropdown-item" href="#"><i class="fa fa-trash"></i> Delete Account</a></li>
-    `;
-    var loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-    loginModal.hide();
-}
-
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const mainCategories = document.getElementById('mainCategories');
-  const subCategories = document.getElementById('subCategories');
-  const subCategoryContent = document.getElementById('subCategoryContent');
-  const backToMain = document.getElementById('backToMain');
-
-  const categoryData = {
-    "food": {
-      "Fruits & Vegetables": ["Fruits", "Vegetables"],
-      "Meat & Fish": ["Meat", "Fish"],
-      "Cooking": ["Oil", "Spices"],
-      "Snacks & Breakfast": ["Chips", "Cereal"],
-      "Dairy & Eggs": ["Milk", "Eggs"]
-    },
-    "personal-care": {
-      "Women's Care": ["Face Cream", "Makeup"],
-      "Men's Care": ["Shaving", "Hair Gel"],
-      "Handwash/Tissue": ["Handwash", "Tissue Box"]
-    },
-    "home-cleaning": {
-      "Harpic": ["Toilet Cleaner", "Bathroom Cleaner"],
-      "Dish Cleaner": ["Liquid Soap", "Dishwasher"],
-      "Air Freshner": ["Room Spray", "Gel Freshener"]
-    }
-  };
-
-  document.querySelectorAll('.category-card').forEach(card => {
-    card.addEventListener('click', function() {
-      const selected = this.getAttribute('data-category');
-      showSubCategories(selected);
-    });
-  });
-
-  function showSubCategories(category) {
-    mainCategories.classList.add('d-none');
-    subCategories.classList.remove('d-none');
-    subCategoryContent.innerHTML = "";
-
-    for (let sub in categoryData[category]) {
-      let subOptions = categoryData[category][sub];
-      let html = `
-        <div class="mb-4">
-          <h5>${sub}</h5>
-          <div class="row">
-      `;
-      subOptions.forEach(opt => {
-        html += `
-          <div class="col-md-4 mb-2">
-            <div class="border p-2 rounded text-center product-box">
-              <img src="https://via.placeholder.com/50" class="mb-2" alt="${opt}">
-              <h6>${opt}</h6>
-            </div>
-          </div>
-        `;
-      });
-      html += `</div></div>`;
-      subCategoryContent.innerHTML += html;
-    }
-  }
-
-  backToMain.addEventListener('click', function() {
-    subCategories.classList.add('d-none');
-    mainCategories.classList.remove('d-none');
-  });
-});
-</script>
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap JS (via CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
