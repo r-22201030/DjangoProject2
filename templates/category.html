@@ -1,33 +1,110 @@
-<!-- templates/category.html -->
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+  }
 
+  .category-list-container {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  h2 {
+    text-align: center;
+    color: #28a745;
+    margin-bottom: 40px;
+  }
+
+  .categories {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  .category-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .category-item h3 {
+    color: #007bff;
+    font-size: 24px;
+  }
+
+  .items .item {
+    background-color: #f9f9f9;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .item h4 {
+    color: #333;
+    font-size: 18px;
+  }
+
+  .item p {
+    color: #555;
+  }
+
+  .item img {
+    margin-top: 15px;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 768px) {
+    .categories {
+      grid-template-columns: 1fr;  /* Single column on mobile */
+    }
+  }
+</style>
+
+{% extends "base.html" %}
 {% block content %}
-  <h1>All Items</h1>
-  <div class="item-grid">
-    {% for item in items %}
-      <div class="item-card">
-        <img src="{{ item.image.url }}" alt="{{ item.name }}">
-        <div class="info">
-          <h3>{{ item.name }}</h3>
-          <p>${{ item.price }}</p>
+  <div class="category-list-container">
+    <h2>Categories</h2>
+    <div class="categories">
+      {% for category in categories %}
+        <div class="category-item">
+          <h3>{{ category.name }}</h3>
+          <p>{{ category.description }}</p>
+
+          <!-- Show the items in each category -->
+          <div class="items">
+            {% for item in category.items.all %}
+              <div class="item">
+                <h4>{{ item.name }}</h4>
+                <p>{{ item.description }}</p>
+                <p>Price: ${{ item.price }}</p>
+                {% if item.image %}
+                  <img src="{{ item.image.url }}" alt="{{ item.name }}" style="max-width: 200px;">
+                {% endif %}
+              </div>
+            {% endfor %}
+
+          </div>
         </div>
-        <a href="{% url 'item_detail' item.id %}" class="details-btn">Details</a>
-      </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
   </div>
-
-  <h2>Categories</h2>
-  <ul>
-    {% for category in categories %}
-      <li>{{ category.name }}</li>
-    {% endfor %}
-  </ul>
-<h2>Items</h2>
-<ul>
-  {% for item in items %}
-    <li>{{ item.name }} - ৳{{ item.price }}</li>
-  {% endfor %}
-</ul>
-
 {% endblock %}
 
+
+</body>
+</html>
