@@ -19,6 +19,8 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
 
     # Category paths
+    path('category/<slug:slug>/', views.category_view, name='category'),
+
     path('categories/', views.category_list, name='category_list'),  # All categories
     path('category/<int:id>/', views.category_detail, name='category_detail'),  # Category detail with items
 ]

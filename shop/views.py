@@ -4,10 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from .models import Category, Item
 from .forms import UserUpdateForm
+from .models import Category, Product
 
-# Home view
-def home(request):
-    return render(request, 'home.html')
 
 # Login view
 def login_view(request):
@@ -65,9 +63,11 @@ def logout_view(request):
 
 # Shop views
 def category_list(request):
-    categories = Category.objects.all()  # Fetch all categories
-    return render(request, 'category.html', {'categories': categories})
-
+    categories = Category.objects.all()
+    print("CATEGORIES:", categories)  # Debug line
+    for c in categories:
+        print(f"{c.name} -> Items: {c.items.all()}")  # If using related_name='items'
+    return render(request, 'category_list.html', {'categories':categories})
 def category_detail(request, id):
     category = get_object_or_404(Category, id=id)  # Fetch category by ID
     items = Item.objects.filter(category=category)  # Get items in the category
@@ -80,3 +80,11 @@ def item_list(request, category_slug):
 def home(request):
     categories = Category.objects.all()
     return render(request, 'home.html', {'categories': categories})
+def category_view(request, slug):
+    category = get_object_or_404(Category, slug=slug)
+    products = Product.objects.filter(category=category)
+    return render(request, 'category.html', {
+        'category': category,
+        'products': products
+    })
+
