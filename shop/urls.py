@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path , include
 from . import views
 from django.contrib.auth import views as auth_views
+from .views import logout_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +27,12 @@ urlpatterns = [
     path('ca/t', include('Category.urls')),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('register/', views.register, name='register'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+path('account/', views.account_view, name='account'),
+path('account/edit/', views.edit_account_view, name='edit_account'),
+path('password_change/', auth_views.PasswordChangeView.as_view(
+    template_name='passchange.html',
+    success_url='/account/'
+), name='password_change'),
+    path('logout/', views.logout_view, name='logout'),
 ]
+

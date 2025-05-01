@@ -36,20 +36,85 @@
             padding: 15px;
             background-color: #f1f1f1;
         }
+        .navbar {
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-left a, .nav-right a, .dropbtn {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    background: none;
+    border-radius:30px;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    min-width: 160px;
+    z-index: 1;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 10px 15px;
+    display: block;
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropbtn:hover {
+    text-decoration: underline;
+}
+
     </style>
 </head>
 <body>
 
-    <nav>
+   <nav class="navbar">
+    <div class="nav-left">
         <a href="{% url 'home' %}">Home</a>
         <a href="{% url 'category_list' %}">Categories</a>
+    </div>
+    <div class="nav-right">
         {% if user.is_authenticated %}
-            <span>Welcome, {{ user.username }}!</span>
-            <a href="{% url 'logout' %}">Logout</a>
+            <div class="dropdown">
+                <button class="dropbtn">Welcome, {{ user.username }} ▼</button>
+                <div class="dropdown-content">
+                    <a href="{% url 'account' %}">View Info</a>
+                    <a href="{% url 'edit_account' %}">Edit Info</a>
+                    <a href="{% url 'password_change' %}">Change Password</a>
+                    <a href="{% url 'logout' %}">Logout</a>
+                </div>
+            </div>
         {% else %}
             <a href="{% url 'login' %}">Login</a>
         {% endif %}
-    </nav>
+    </div>
+</nav>
+
+
 
     <div class="container">
         {% block content %}{% endblock %}

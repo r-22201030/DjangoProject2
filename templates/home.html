@@ -64,16 +64,17 @@
             display: inline-block;
         }
 
-        .dropbtn {
+        .drop {
             background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
             font-size: 16px;
-            border: none;
+            border-radius: 20px;
+            gap: 20px;
             cursor: pointer;
         }
 
-        .dropbtn:hover {
+        .drop:hover {
             background-color: #45a049;
         }
 
@@ -170,7 +171,7 @@
         <!-- Left side -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'all_items' %}">Categories</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Categories</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Weekly Deals</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Populars</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Savings</a></li>
@@ -183,11 +184,25 @@
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link" href="#">🛒 Cart</a></li>
           <div class="dropdown">
-        <button class="dropbtn">👥 Login / Register</button>
+        <button class="drop">👥 Login / Register</button>
         <div class="dropdown-content">
             <a href="{% url 'login' %}">Login</a>
           <a href="{% url 'register' %}">Register</a>
         </div>
+    </div>
+             <div class="nav-right">
+        {% if user.is_authenticated %}
+            <div class="dropdown">
+                <button class="drop">Welcome, {{ user.first_name|default:user.username }} ▼</button>
+                <div class="dropdown-content">
+                    <a href="{% url 'account' %}">My Account</a>
+                    <a href="{% url 'edit_account' %}">Edit Info</a>
+                    <a href="{% url 'password_change' %}">Change Password</a>
+                    <a href="{% url 'logout' %}"> 🚪Logout</a>
+                </div>
+            </div>
+
+        {% endif %}
     </div>
 
     <div id="loginForm">
@@ -223,7 +238,6 @@
             document.getElementById('loginForm').style.display = 'none';
         });
     </script>
-            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">🚪 Logout</a></li>
         </ul>
       </div>
     </div>
@@ -238,11 +252,7 @@
     </div>
   </div>
 
-  <!-- ✅ Main Content Area -->
-    <main class="container py-5">
-        {% block content %}
-        {% endblock %}
-    </main>
+
 
     <!-- ✅ Footer -->
     <footer class="bg-light text-center py-3 mt-auto" style="margin-bottom: 50px;">
