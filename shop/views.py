@@ -23,6 +23,7 @@ from django.shortcuts import render, redirect
 # views.py
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import UserCreationForm
 
 def home(request):
     return render(request, 'home.html')
@@ -39,3 +40,13 @@ def login_view(request):
         else:
             error = "Invalid credentials"
     return render(request, 'login.html', {'error': error})
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')  # Replace with your homepage view name
+    else:
+        form = UserCreationForm()
+    return render(request, 'register.html', {'form': form})
