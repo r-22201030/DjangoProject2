@@ -1,86 +1,109 @@
-<!-- templates/category.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>All Items - KinbenNaki</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f7f7f7;
-    }
-    h1 {
-      text-align: center;
-      margin: 20px 0;
-    }
-    .item-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px;
-    }
-    .item-card {
-      position: relative;
-      width: 200px;
-      background: #fff;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
-    }
-    .item-card:hover {
-      transform: translateY(-5px);
-    }
-    .item-card img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-    }
-    .item-card .info {
-      padding: 10px;
-      text-align: center;
-    }
-    .item-card .info h3 {
-      margin: 10px 0 5px;
-      font-size: 1.1rem;
-    }
-    .item-card .info p {
-      color: green;
-      font-weight: bold;
-    }
-    .details-btn {
-      display: none;
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: orange;
-      color: white;
-      padding: 5px 10px;
-      border: none;
-      border-radius: 5px;
-      text-decoration: none;
-    }
-    .item-card:hover .details-btn {
-      display: block;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-  <h1>All Items</h1>
-  <div class="item-grid">
-    {% for item in items %}
-      <div class="item-card">
-        <img src="{{ item.image.url }}" alt="{{ item.name }}">
-        <div class="info">
-          <h3>{{ item.name }}</h3>
-          <p>${{ item.price }}</p>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+  }
+
+  .category-list-container {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  h2 {
+    text-align: center;
+    color: #28a745;
+    margin-bottom: 40px;
+  }
+
+  .categories {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  .category-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .category-item h3 {
+    color: #007bff;
+    font-size: 24px;
+  }
+
+  .items .item {
+    background-color: #f9f9f9;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .item h4 {
+    color: #333;
+    font-size: 18px;
+  }
+
+  .item p {
+    color: #555;
+  }
+
+  .item img {
+    margin-top: 15px;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 768px) {
+    .categories {
+      grid-template-columns: 1fr;  /* Single column on mobile */
+    }
+  }
+</style>
+
+{% extends "base.html" %}
+{% block content %}
+  <div class="category-list-container">
+    <h2>Categories</h2>
+    <div class="categories">
+      {% for category in categories %}
+        <div class="category-item">
+          <h3>{{ category.name }}</h3>
+          <p>{{ category.description }}</p>
+
+          <!-- Show the items in each category -->
+          <div class="items">
+            {% for item in category.items.all %}
+              <div class="item">
+                <h4>{{ item.name }}</h4>
+                <p>{{ item.description }}</p>
+                <p>Price: ${{ item.price }}</p>
+                {% if item.image %}
+                  <img src="{{ item.image.url }}" alt="{{ item.name }}" style="max-width: 200px;">
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
         </div>
-        <a href="{% url 'item_detail' item.id %}" class="details-btn">Details</a>
-      </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
   </div>
+{% endblock %}
+
+
 </body>
 </html>
