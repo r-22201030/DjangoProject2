@@ -24,7 +24,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('ca/t', include('Category.urls')),
+    path('categories/items/', views.category_list, name='category_list'),
+
+    path('weekly-deals/', views.weekly_deals, name='weekly_deals'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('register/', views.register, name='register'),
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+
+
 ]

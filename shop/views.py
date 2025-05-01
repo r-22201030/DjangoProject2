@@ -40,6 +40,16 @@ def login_view(request):
         else:
             error = "Invalid credentials"
     return render(request, 'login.html', {'error': error})
+
+
+def category_list(request):
+    categories = Category.objects.all()
+    items = Item.objects.all()
+    return render(request, 'category_list.html', {'categories': categories, 'items': items})
+
+def weekly_deals(request):
+    deals = Item.objects.filter(is_weekly_deal=True)  # You’ll need a field like this
+    return render(request, 'weekly_deals.html', {'deals': deals})
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -47,6 +57,7 @@ def register(request):
             user = form.save()
             login(request, user)
             return redirect('home')  # Replace with your homepage view name
+
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
