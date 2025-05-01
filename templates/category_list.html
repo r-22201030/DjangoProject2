@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f9f9f9;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 36px;
+        margin-bottom: 30px;
+        color: #2c3e50;
+    }
+
+    .category-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 25px;
+    }
+
+    .category-card {
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        transition: transform 0.2s ease-in-out;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .category-card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+    }
+
+    .category-icon {
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+
+    .category-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #34495e;
+        margin-bottom: 8px;
+    }
+
+    .category-description {
+        font-size: 14px;
+        color: #7f8c8d;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+</style>
+
+<div class="container">
+    <h1>Browse Grocery Categories</h1>
+
+    <div class="category-grid">
+        {% for category in categories %}
+        <a href="{% url 'category' slug=category.slug %}">
+            <div class="category-card">
+                <div class="category-icon">
+                    {% if category.name|lower == 'meat' %}
+                        🥩
+                    {% elif category.name|lower == 'fish' %}
+                        🐟
+                    {% elif category.name|lower == 'milk' %}
+                        🥛
+                    {% elif category.name|lower == 'vegetables' %}
+                        🥦
+                    {% elif category.name|lower == 'fruits' %}
+                        🍎
+                    {% elif category.name|lower == 'rice' %}
+                        🍚
+
+                    {% elif category.name|lower == 'snacks' %}
+                        🍪
+                    {% elif category.name|lower == 'eggs' %}
+                         🥚
+                    {% elif category.name|lower == 'bakery' %}
+                        🍞
+                    {% elif category.name|lower == 'oil' %}
+                        🛢️
+                    {% elif category.name|lower == 'cleaning' %}
+                        🧽
+                    {% else %}
+                        🛒
+                    {% endif %}
+                </div>
+                <div class="category-title">{{ category.name }}</div>
+                <div class="category-description">{{ category.description|default:"No description available." }}</div>
+            </div>
+        </a>
+        {% empty %}
+        <p>No categories found.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
