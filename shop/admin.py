@@ -23,4 +23,3 @@ class ItemAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'price', 'available')
 
 admin.site.register(Item, ItemAdmin)
-

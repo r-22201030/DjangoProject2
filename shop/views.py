@@ -81,10 +81,7 @@ def home(request):
     categories = Category.objects.all()
     return render(request, 'home.html', {'categories': categories})
 def category_view(request, slug):
-    category = get_object_or_404(Category, slug=slug)
-    products = Product.objects.filter(category=category)
-    return render(request, 'category.html', {
-        'category': category,
-        'products': products
-    })
+    category = Category.objects.get(slug=slug)
+    items = category.items.all()  # Access all items related to this category
+    return render(request, 'category_detail.html', {'category': category, 'items': items})
 
