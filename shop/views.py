@@ -85,3 +85,6 @@ def category_view(request, slug):
     items = category.items.all()  # Access all items related to this category
     return render(request, 'category_detail.html', {'category': category, 'items': items})
 
+
+def weekly_deals(request):
+    return render(request, 'weekly_deals.html')
