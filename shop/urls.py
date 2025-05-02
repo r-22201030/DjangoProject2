@@ -25,4 +25,5 @@ urlpatterns = [
     path('category/<int:id>/', views.category_detail, name='category_detail'),
     path('item/<int:id>/', views.item_list, name='item_list'),# Category detail with items
     path('weekly-deals/', views.weekly_deals, name='weekly_deals'),
+    path('categories/<int:category_id>/', views.category_detail, name='category_detail'),
 ]

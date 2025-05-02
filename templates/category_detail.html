@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,18 +9,30 @@
     <title>{{ category.name }} - Items</title>
 </head>
 <body>
-    <h1>Items in {{ category.name }}</h1>
 
-    <!-- Display the list of items in the selected category -->
-    <ul>
-        {% for item in items %}
-            <li>{{ item.name }} - {{ item.price }} - {{ item.description }}</li>
-        {% empty %}
-            <p>No items available in this category.</p>
-        {% endfor %}
-    </ul>
+    <h2>{{ category.name }} Items</h2>
 
-    <!-- Optionally, a link to go back to the home page or categories page -->
-    <a href="/">Back to Home</a>
+    <div class="row">
+      {% for item in items %}
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            {% if item.image %}
+              <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ item.name }}</h5>
+              <p class="card-text">{{ item.description }}</p>
+              <p class="card-text">Price: ${{ item.price }}</p>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <p>No items in this category yet.</p>
+      {% endfor %}
+    </div>
+
+    <a href="{% url 'category_list' %}">Back to Categories</a>
+
 </body>
 </html>
+{% endblock %}
