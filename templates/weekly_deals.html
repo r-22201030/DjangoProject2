@@ -1,20 +1,117 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2 class="mb-4">Weekly Deals</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weekly Deals</title>
+  <style>
+    .weekly-deals-container {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    h2.text-center {
+      font-weight: 700;
+      color: #1f2d3d;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      height: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 1px solid #eee;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .card-text {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .price-tag {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .price-tag del {
+      color: #999;
+      margin-right: 8px;
+    }
+
+    .btn-success {
+      background-color: #28a745;
+      border: none;
+      font-weight: bold;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-success:hover {
+      background-color: #218838;
+    }
+
+    .no-deals {
+      text-align: center;
+      color: #777;
+      margin-top: 40px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+<div class="weekly-deals-container">
+  <h2 class="text-center">🌟 Weekly Deals</h2>
+
   <div class="row">
-    {% for item in deals %}
+    {% for item in weekly_deals %}
       <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow">
-          <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
-          <div class="card-body">
+        <div class="card">
+          {% if item.image %}
+            <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
+          {% endif %}
+          <div class="card-body d-flex flex-column">
             <h5 class="card-title">{{ item.name }}</h5>
-            <p class="card-text">৳{{ item.price }}</p>
+            <p class="card-text">{{ item.description|truncatewords:15 }}</p>
+            <p class="price-tag">
+              <del>${{ item.price }}</del>
+              <span class="text-danger">${{ item.discount_price }}</span>
+            </p>
+            <a href="{% url 'place_order' item.id %}" class="btn btn-success mt-auto">Order Now</a>
           </div>
         </div>
       </div>
     {% empty %}
-      <p>No deals available right now.</p>
+      <p class="no-deals">No weekly deals available right now. Check back soon!</p>
     {% endfor %}
   </div>
+</div>
+
+</body>
+</html>
 {% endblock %}
