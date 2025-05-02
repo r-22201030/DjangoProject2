@@ -88,3 +88,22 @@ def category_view(request, slug):
 
 def weekly_deals(request):
     return render(request, 'weekly_deals.html')
+def category_detail(request, category_id):
+    category = get_object_or_404(Category, id=category_id)
+    items = category.items.all()
+    return render(request, 'category_detail.html', {'category': category, 'items': items})
+
+def place_order(request, item_id):
+    if request.method == 'POST':
+        quantity = request.POST.get('quantity')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        # Save order logic here...
+        # Redirect or show success
+        return redirect('order_success')
+
+def order_success(request):
+    return render(request, 'order_success.html')
+
+
+
