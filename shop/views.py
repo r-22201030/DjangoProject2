@@ -5,6 +5,9 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Category, Item
 from .forms import UserUpdateForm
 from .models import Category, Product
+from .models import LoyaltyProgram
+from django.contrib.auth.decorators import login_required
+
 
 
 # Login view
@@ -106,4 +109,21 @@ def order_success(request):
     return render(request, 'order_success.html')
 
 
+@login_required
+def loyalty_rewards(request):
+    # Get or create the loyalty program for the user
+    loyalty_program, created = LoyaltyProgram.objects.get_or_create(user=request.user)
 
+    # You can update the total spent from a form submission or directly (just a placeholder for now)
+    if request.method == 'POST':
+        amount_spent = float(request.POST.get('amount_spent', 0))  # Get amount spent from the form
+        loyalty_program.update_total_spent(amount_spent)
+        loyalty_program.check_reward()
+
+    context = {
+        'loyalty_program': loyalty_program
+    }
+    return render(request, 'loyalty_rewards.html', context)
+
+def loyalty_success(request):
+    return render(request, 'update.html')

@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block content %}
+   <style>
+        /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+        }
+
+
+
+        .loyalty-info {
+            background-color: #b7cfaa;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0px 0px 0px rgba(0,0,0,0.5);
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .loyalty-info h2 {
+            margin-bottom: 15px;
+            color: #1e90ff;
+        }
+
+        .loyalty-info p {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            height: 25px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar span {
+            display: block;
+            height: 100%;
+            background-color: #1e90ff;
+            border-radius: 10px;
+            transition: width 0.5s ease-in-out;
+        }
+
+        @media (max-width: 600px) {
+            .navbar a {
+                display: block;
+                margin: 10px 0;
+            }
+
+            .loyalty-info {
+                padding: 20px;
+            }
+        }
+    </style>
+<body>
+
+
+
+    <div class="loyalty-info">
+        <h2>Welcome, {{ loyalty_program.user.username }}!</h2>
+        <p>Total spent this month: ৳{{ loyalty_program.total_spent }}</p>
+        <p>Reward earned: ৳{{ loyalty_program.reward_earned }}</p>
+
+       <form method="POST" action="/loyalty-success/">
+    {% csrf_token %}
+    <label for="amount_spent">Amount spent this month:</label>
+    <input type="number" name="amount_spent" required>
+    <button type="submit">Update</button>
+</form>
+
+        <h3>Progress</h3>
+        <div class="progress-bar">
+            <span style="width: {{ loyalty_program.total_spent|floatformat:0 }}%"></span>
+        </div>
+
+        <p>{{ loyalty_program.total_spent }} out of 120,000 spent this year</p>
+    </div>
+
+
+
+</body>
+
+{% endblock %}

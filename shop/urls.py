@@ -29,4 +29,9 @@ urlpatterns = [
     path('order/<int:item_id>/', views.place_order, name='place_order'),
     path('order-success/', views.order_success, name='order_success'),
 
+ path('loyalty-rewards/', views.loyalty_rewards, name='loyalty_rewards'),
+
+path('loyalty-success/', views.loyalty_success, name='loyalty_success'),
+
+
 ]

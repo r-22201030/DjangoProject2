@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <style>
+       body {
+      background-color: #f9f9f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 20px;
+    }
+
+.success-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+        .success-box {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .success-box h2 {
+            color: #135322;
+            margin-bottom: 20px;
+        }
+
+        .success-box a {
+            text-decoration: none;
+            background-color: #296719;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+             justify-content: center;
+
+        }
+
+        .success-box a:hover {
+            background-color: #136017;
+        }
+    </style>
+
+<body>
+ <div class="success-container">
+    <div class="success-box">
+        <h2>✅ Amount Updated Successfully!</h2>
+        <p>Thank you for staying loyal.</p>
+        <a href="{% url 'home' %}">Back to home Page</a>
+    </div>
+     </div>
+</body>
+{% endblock %}
