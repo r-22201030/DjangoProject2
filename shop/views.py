@@ -127,3 +127,6 @@ def loyalty_rewards(request):
 
 def loyalty_success(request):
     return render(request, 'update.html')
+def popular_items(request):
+    popular_products = Item.objects.filter(popular=True)
+    return render(request, 'popular_items.html', {'items': popular_products})

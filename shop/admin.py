@@ -17,9 +17,12 @@ from .models import Category, Item
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'is_active')
 
+
 admin.site.register(Category, CategoryAdmin)
 
 class ItemAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'price', 'available')
+
+
 
 admin.site.register(Item, ItemAdmin)

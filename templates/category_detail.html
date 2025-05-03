@@ -103,7 +103,23 @@
             <p class="card-text">Price: ${{ item.price }} per kg</p>
 
             <input type="number" class="form-control mb-2" placeholder="Enter quantity (kg)" min="1">
+<!-- Payment Method -->
+<label class="mt-2">Select Payment Method:</label>
+<select class="form-control payment-method" name="payment_method" onchange="toggleOnlineOptions(this)">
+  <option value="">-- Select --</option>
+  <option value="cod">Cash on Delivery</option>
+  <option value="online">Online Payment</option>
+</select>
 
+<!-- Online Payment Options -->
+<div class="online-payment-options mt-2" style="display: none;">
+  <label>Select Online Payment Type:</label>
+  <select class="form-control" name="online_payment_type">
+    <option value="">-- Select --</option>
+    <option value="bkash">Bkash</option>
+    <option value="nagad">Nagad</option>
+  </select>
+</div>
             <button class="btn btn-success w-100 order-btn mt-auto">Order</button>
 
             <!-- Hidden order form -->
@@ -141,7 +157,16 @@
     });
   });
 </script>
-
+<script>
+  function toggleOnlineOptions(select) {
+    const onlineDiv = select.closest('form').querySelector('.online-payment-options');
+    if (select.value === 'online') {
+      onlineDiv.style.display = 'block';
+    } else {
+      onlineDiv.style.display = 'none';
+    }
+  }
+</script>
 
  </body>
 </html>
