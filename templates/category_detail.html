@@ -64,7 +64,7 @@
       margin-top: 8px;
     }
 
-    /* Back link styling */
+
     a {
       display: block;
       text-align: center;
@@ -103,7 +103,7 @@
             <p class="card-text">Price: ${{ item.price }} per kg</p>
 
             <input type="number" class="form-control mb-2" placeholder="Enter quantity (kg)" min="1">
-<!-- Payment Method -->
+
 <label class="mt-2">Select Payment Method:</label>
 <select class="form-control payment-method" name="payment_method" onchange="toggleOnlineOptions(this)">
   <option value="">-- Select --</option>
@@ -111,7 +111,7 @@
   <option value="online">Online Payment</option>
 </select>
 
-<!-- Online Payment Options -->
+
 <div class="online-payment-options mt-2" style="display: none;">
   <label>Select Online Payment Type:</label>
   <select class="form-control" name="online_payment_type">
@@ -122,7 +122,7 @@
 </div>
             <button class="btn btn-success w-100 order-btn mt-auto">Order</button>
 
-            <!-- Hidden order form -->
+
             <form class="order-form mt-3" style="display: none;" method="post" action="{% url 'place_order' item.id %}">
               {% csrf_token %}
               <input type="hidden" name="quantity">
