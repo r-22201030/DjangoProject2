@@ -36,4 +36,5 @@ urlpatterns = [
 
     path('offers/', views.offer_items, name='offer_items'),
 
+
 ]
