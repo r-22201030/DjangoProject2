@@ -21,10 +21,18 @@ class Item(models.Model):
     image = models.ImageField(upload_to='items/', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     popular = models.BooleanField(default=False)
-
+    has_offer = models.BooleanField(default=False)
+    offer_percent = models.PositiveIntegerField(blank=True, null=True)
+    buy_two_get_one = models.BooleanField(default=False)  # New field
 
     def __str__(self):
         return self.name
+
+    def discounted_price(self):
+        if self.has_offer and self.offer_percent:
+            return self.price - (self.price * self.offer_percent / 100)
+        return self.price
+
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
@@ -56,3 +64,5 @@ class LoyaltyProgram(models.Model):
         if self.total_spent >= 10000:  # Adjust the condition as needed
             self.reward_earned = self.total_spent * 0.10  # Example: 10% reward
             self.save()
+
+

@@ -1,11 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+    <style>
+    .container a{
+        background-color: #148a14;
+    }
+
+    </style>
 <div class="container mt-5 text-center">
   <div class="alert alert-success p-5 rounded shadow">
     <h2 class="mb-3">🎉 Order Confirmed!</h2>
     <p class="lead">Thank you for your purchase. We will contact you shortly for delivery.</p>
     <a href="{% url 'category_list' %}" class="btn btn-primary mt-4">🔙 Back to Categories</a>
+      <a href="{% url 'offer_items' %}" class="btn btn-primary mt-4">🔙 Back to Offer Items</a>
   </div>
 </div>
 {% endblock %}

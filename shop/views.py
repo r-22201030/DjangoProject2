@@ -7,7 +7,7 @@ from .forms import UserUpdateForm
 from .models import Category, Product
 from .models import LoyaltyProgram
 from django.contrib.auth.decorators import login_required
-
+from django.db.models import Q
 
 
 # Login view
@@ -130,3 +130,7 @@ def loyalty_success(request):
 def popular_items(request):
     popular_products = Item.objects.filter(popular=True)
     return render(request, 'popular_items.html', {'items': popular_products})
+
+def offer_items(request):
+    items = Item.objects.filter(Q(has_offer=True) | Q(buy_two_get_one=True))
+    return render(request, 'offer_items.html', {'items': items})

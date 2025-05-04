@@ -34,5 +34,6 @@ urlpatterns = [
     path('loyalty-success/', views.loyalty_success, name='loyalty_success'),
     path('popular/', views.popular_items, name='popular_items'),
 
+    path('offers/', views.offer_items, name='offer_items'),
 
 ]
