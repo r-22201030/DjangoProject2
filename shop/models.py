@@ -65,4 +65,3 @@ class LoyaltyProgram(models.Model):
             self.reward_earned = self.total_spent * 0.10  # Example: 10% reward
             self.save()
 
-

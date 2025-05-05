@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us</title>
+  <style>
+   body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(242, 242, 242, 0.99);
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+    .header {
+  background-color: white;
+  padding: 15px 20px;
+  text-align: center;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+    .header h2 {
+        background-color: #adedb0;
+      margin: 0 auto;
+      font-size: 30px;
+    }
+
+    .container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 20px;
+  background-color: #fff;
+  box-sizing: border-box;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+    .section-title {
+      color: red;
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .contact-info {
+      margin-top: 10px;
+    }
+
+    .contact-info i {
+      margin-right: 8px;
+    }
+
+    .map {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    input, textarea {
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #ffce00;
+      color: black;
+      border: none;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    button:hover {
+      background-color: #e6b800;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h2>Contact Us</h2>
+  </div>
+
+  <div class="container">
+    <div class="section-title">About us</div>
+    <p>
+     🛒 Kinben Naki is your trusted destination for quality products at the best price.<br>
+🚚 We deliver right to your doorstep — fast, safe, and hassle-free.<br>
+💬 Friendly customer support is always ready to help you.<br>
+💰 We offer exclusive deals and weekly savings just for you.<br>
+❤ Shop with confidence, because your satisfaction is our priority
+    </p>
+    <p class="contact-info">
+      <strong>Contact hotline at-</strong><br>
+      <span>📞 017##-######</span><br>
+      <span>✉ kinbennaki@123.com</span>
+    </p>
+
+
+    <div class="section-title">Contact Form</div>
+    <form method="POST" action="{% url 'contact' %}">
+  {% csrf_token %}
+  <input type="text" name="name" placeholder="Your name" required>
+  <input type="email" name="email" placeholder="Your email" required>
+  <textarea name="message" placeholder="Your message" required></textarea>
+  <button type="submit">Submit</button>
+</form>
+  </div>
+
+</body>
+</html>
+{% endblock %}/html>

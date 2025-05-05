@@ -134,3 +134,14 @@ def popular_items(request):
 def offer_items(request):
     items = Item.objects.filter(Q(has_offer=True) | Q(buy_two_get_one=True))
     return render(request, 'offer_items.html', {'items': items})
+
+
+def contact_view(request):
+    if request.method == 'POST':
+        print("Form submitted")
+        return redirect('success')
+    return render(request, 'contact.html')
+
+
+def success_view(request):
+    return render(request, 'success.html')
